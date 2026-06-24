@@ -19,6 +19,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 COPY conf/nginx/nginx-site.conf /etc/nginx/sites-available/default
+RUN rm -f /etc/nginx/sites-enabled/default && ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 RUN chmod -R 775 storage bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache
