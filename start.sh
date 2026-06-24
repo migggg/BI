@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-set -e
-
 # Create socket directory
 mkdir -p /var/run/php
 
