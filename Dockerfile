@@ -25,4 +25,7 @@ RUN chmod -R 775 storage bootstrap/cache \
 
 EXPOSE 80
 
-CMD bash scripts/00-laravel-deploy.sh && nginx -g 'daemon off;' & php-fpm
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+CMD ["/start.sh"]
