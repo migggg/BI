@@ -4,13 +4,13 @@ echo "Running composer"
 composer install --no-dev --working-dir=/var/www/html
 
 echo "Caching config..."
-php artisan config:cache
+php artisan config:cache --no-ansi
 
 echo "Caching routes..."
-php artisan route:cache
+php artisan route:cache --no-ansi
 
 echo "Linking storage..."
-php artisan storage:link
+php artisan storage:link --no-ansi
 
 echo "Running migrations..."
-php artisan migrate --force
+php artisan migrate --force --no-ansi
