@@ -10,6 +10,11 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader --no-scripts && \
     composer dump-autoload --optimize
 
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install \
+    && npm run build
+
 COPY conf/nginx/nginx-site.conf /etc/nginx/sites-available/default
 COPY conf/nginx/nginx-site.conf /etc/nginx/conf.d/default.conf
 RUN rm -f /etc/nginx/sites-enabled/default && \
@@ -18,7 +23,8 @@ RUN rm -f /etc/nginx/sites-enabled/default && \
 RUN rm -f /usr/local/etc/php-fpm.d/www.conf /usr/local/etc/php-fpm.d/www.conf.default /usr/local/etc/php-fpm.d/docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 COPY conf/php/www.conf /usr/local/etc/php-fpm.d/www.conf
 
-RUN chmod -R 775 storage bootstrap/cache \
+RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache \
+    && chmod -R 777 storage bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache
 
 EXPOSE 80
