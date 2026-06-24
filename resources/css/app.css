@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+  1. Increase base font-size to 108%. 
+  Since Tailwind uses 'rem' for almost all typography, paddings, and margins,
+  this single rule perfectly scales up the entire UI (text and spacing) proportionally!
+*/
+html {
+    font-size: 120%; 
+}
+
+/* 
+  2. Maximum Readability in Dark Mode 
+  Force ALL text that is normally gray/dim to be pure white or near-white.
+*/
+html.dark .text-gray-900,
+html.dark .dark\:text-gray-900,
+html.dark .text-gray-800,
+html.dark .dark\:text-gray-800,
+html.dark .text-gray-700,
+html.dark .dark\:text-gray-700,
+html.dark .text-gray-600,
+html.dark .dark\:text-gray-600,
+html.dark .text-gray-500,
+html.dark .dark\:text-gray-500,
+html.dark .text-gray-400,
+html.dark .dark\:text-gray-400,
+html.dark .text-gray-300,
+html.dark .dark\:text-gray-300 {
+    color: #ffffff !important; 
+}
+
+html.dark body {
+    color: #ffffff !important;
+}
+
+html.dark .text-indigo-600,
+html.dark .dark\:text-indigo-400 {
+    color: #a5b4fc !important; /* Make indigo links brighter */
+}
