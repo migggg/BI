@@ -10,6 +10,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 COPY conf/nginx/nginx-site.conf /etc/nginx/sites-available/default
+COPY conf/nginx/nginx-site.conf /etc/nginx/conf.d/default.conf
 RUN rm -f /etc/nginx/sites-enabled/default && \
     ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
