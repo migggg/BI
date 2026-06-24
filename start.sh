@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+mkdir -p /var/run/php
+
 php-fpm -D
-sleep 2
+sleep 3
 
 php artisan config:cache
 php artisan route:cache
