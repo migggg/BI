@@ -7,13 +7,15 @@ RUN apt-get update && apt-get install -y \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 COPY . .
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --optimize-autoloader --no-scripts && \
+    composer dump-autoload --optimize
 
 COPY conf/nginx/nginx-site.conf /etc/nginx/sites-available/default
 COPY conf/nginx/nginx-site.conf /etc/nginx/conf.d/default.conf
 RUN rm -f /etc/nginx/sites-enabled/default && \
     ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
+RUN rm -f /usr/local/etc/php-fpm.d/www.conf /usr/local/etc/php-fpm.d/www.conf.default /usr/local/etc/php-fpm.d/docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 COPY conf/php/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 RUN chmod -R 775 storage bootstrap/cache \
